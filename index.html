@@ -16,54 +16,6 @@
 
     }
 
-    .dropbtn {
-      background-color: #3498DB;
-      color: white;
-      padding: 16px;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-    }
-
-    /* Dropdown button on hover & focus */
-    .dropbtn:hover,
-    .dropbtn:focus {
-      background-color: #2980B9;
-    }
-
-    /* The container <div> - needed to position the dropdown content */
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
-    /* Dropdown Content (Hidden by Default) */
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f1f1f1;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-      z-index: 1;
-    }
-
-    /* Links inside the dropdown */
-    .dropdown-content a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-    }
-
-    /* Change color of dropdown links on hover */
-    .dropdown-content a:hover {
-      background-color: #ddd;
-    }
-
-    /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-    .show {
-      display: block;
-    }
   </style>
 </head>
 
@@ -94,7 +46,7 @@
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-              aria-expanded="true" aria-controls="collapseOne" onclick="func1()">
+              aria-expanded="true" aria-controls="collapseOne" onclick="func()">
               New York
             </button>
           </h2>
@@ -107,17 +59,13 @@
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-              aria-expanded="false" aria-controls="collapseTwo">
-              Accordion Item #2
+              aria-expanded="false" aria-controls="collapseTwo" onclick="func()">
+             London
             </button>
           </h2>
           <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin
-              adds the appropriate classes that we use to style each element. These classes control the overall appearance, as
-              well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our
-              default variables. It's also worth noting that just about any HTML can go within the
-              <code>.accordion-body</code>, though the transition does limit overflow.
+            <div class="accordion-body" id="lo">
+            
             </div>
           </div>
         </div>
@@ -125,16 +73,12 @@
           <h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
               aria-expanded="false" aria-controls="collapseThree">
-              Accordion Item #3
+             Tokyo
             </button>
           </h2>
           <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-              <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin
-              adds the appropriate classes that we use to style each element. These classes control the overall appearance, as
-              well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our
-              default variables. It's also worth noting that just about any HTML can go within the
-              <code>.accordion-body</code>, though the transition does limit overflow.
+            <div class="accordion-body" id="to">
+            
             </div>
           </div>
         </div>
@@ -159,33 +103,21 @@
       document.getElementById('time').innerHTML = time + " </br> on " + date;
     }, 1000)
 
-         function getCurrentTimeInTimeZone(timeZone) {
-      const options = { timeZone: timeZone, hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
-      const formatter = new Intl.DateTimeFormat('en-US', options);
-      
-      const now = new Date();
-     
-      return formatter.format(now);
-      console.log(formatter.format(now))
-         }
-    
-    // const newYorkTime = setInterval(  getCurrentTimeInTimeZone('America/New_York') , 1000);
-    const londonTime = getCurrentTimeInTimeZone('Europe/London');
-    const tokyoTime = getCurrentTimeInTimeZone('Asia/Tokyo');
-    function func1() {
-      const ny=document.querySelector("#ny");
+       
+     function func() {
+        const newYorkTime = new Date().toLocaleString("en-US", { timeZone: "America/New_York" });
+        const londonTime = new Date().toLocaleString("en-US", { timeZone: "Europe/London" });
+        const tokyoTime = new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" });
 
-     ny.innerHTML = "<h1>" + "Current time in New York: " + newYorkTime + "</h1>";
-    
-    }
-    function func2() {
-      span.innerHTML = "<h1>" + "Current time in London: " + londonTime + "</h1>";
-    }
-    function func3() {
-      span.innerHTML = "<h1>" + "Current time in Tokyo: " + tokyoTime + "</h1>";
-    }
+        document.getElementById("ny").innerHTML= "<h3>"+`Date and time: ${newYorkTime}`+"</h3>";
+        document.getElementById("lo").innerHTML = "<h3>" + `Date and time: ${londonTime}` + "</h3>";
+        document.getElementById("to").innerHTML = "<h3>" +`Date and time: ${tokyoTime}` + "</h3>";
+      }
+
   
-    
+      setInterval(func(), 1000);
+
+   
 
 
   </script>
